@@ -12,7 +12,9 @@ let ButtonSize: Float = 16.0
 let MaxWidth: Float = 320.0
 let MinHeight:Float = 44.0
 
-class PopupMessageViewController: UIViewController {
+class PopupMessageViewController: UIViewController, KUIPopOverUsable {
+    var contentSize: CGSize = CGSize()
+    
     var message: String = "" {
         didSet {
             loadViewIfNeeded()
@@ -26,6 +28,8 @@ class PopupMessageViewController: UIViewController {
             tempLabel.sizeToFit()
             
             preferredContentSize = CGSize(width: CGFloat(MaxWidth), height: tempLabel.frame.height + CGFloat(MinHeight))
+            contentSize = preferredContentSize
+            
             messageLabel?.frame = CGRect(x: 10, y: 10, width: tempLabel.frame.width, height: tempLabel.frame.height)
         }
     }
@@ -63,7 +67,7 @@ class PopupMessageViewController: UIViewController {
     }
 }
 
-class MessageButton: UIView, UIPopoverPresentationControllerDelegate {
+class MessageButton: UIView {
     open weak var popupPresentingViewController: UIViewController?
     open var message: String?
     
@@ -83,40 +87,14 @@ class MessageButton: UIView, UIPopoverPresentationControllerDelegate {
         fatalError("not implemented")
     }
     
-    func presentedViewController() -> UIViewController {
-        let messageViewController = PopupMessageViewController(nibName: nil, bundle: nil)
-        
-        messageViewController.message = self.message!
-        messageViewController.modalPresentationStyle = .popover
-        
-        return messageViewController
-    }
-    
     func presentMessagePopup() {
-        let messageViewController = self.presentedViewController()
-        
-        self.popupPresentingViewController?.present(messageViewController, animated: true, completion: nil)
-        
-        let presentationController = messageViewController.popoverPresentationController
-        presentationController?.permittedArrowDirections = .left
-        presentationController?.sourceView = self.button
-        presentationController?.sourceRect = CGRect(x: 0, y: CGFloat(ButtonSize * 0.5), width: 1.0, height: 1.0)
-        presentationController?.delegate = self
+        let messageViewController = PopupMessageViewController(nibName: nil, bundle: nil)
+        messageViewController.message = message!
+        messageViewController.showPopover(sourceView: button!, sourceRect: CGRect(x: 0, y: CGFloat(ButtonSize * 0.5), width: 1.0, height: 1.0))
     }
     
     @objc func buttonTapped(sender: UIButton) {
         self.presentMessagePopup()
     }
     
-    func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
-        
-    }
-    
-    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        return true
-    }
-    
-    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-        popoverPresentationController.delegate = nil
-    }
 }

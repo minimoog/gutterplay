@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5204C0781FE1EEAE00322C7E /* KUIPopOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204C0761FE1EEAE00322C7E /* KUIPopOver.swift */; };
+		5204C0791FE1EEAE00322C7E /* KUIPopOverUsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204C0771FE1EEAE00322C7E /* KUIPopOverUsable.swift */; };
 		520D10EE1FD7565D00631E57 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520D10ED1FD7565D00631E57 /* EditorViewController.swift */; };
 		5232A75C1FCF7BBE007239A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232A75B1FCF7BBE007239A3 /* AppDelegate.swift */; };
 		5232A7611FCF7BBE007239A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5232A75F1FCF7BBE007239A3 /* Main.storyboard */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5204C0761FE1EEAE00322C7E /* KUIPopOver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUIPopOver.swift; sourceTree = "<group>"; };
+		5204C0771FE1EEAE00322C7E /* KUIPopOverUsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUIPopOverUsable.swift; sourceTree = "<group>"; };
 		520D10ED1FD7565D00631E57 /* EditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
 		5232A7581FCF7BBE007239A3 /* gutterplay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gutterplay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5232A75B1FCF7BBE007239A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +41,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5204C0751FE1EE9E00322C7E /* KUIPopOver */ = {
+			isa = PBXGroup;
+			children = (
+				5204C0761FE1EEAE00322C7E /* KUIPopOver.swift */,
+				5204C0771FE1EEAE00322C7E /* KUIPopOverUsable.swift */,
+			);
+			name = KUIPopOver;
+			sourceTree = "<group>";
+		};
 		5232A74F1FCF7BBE007239A3 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +69,7 @@
 		5232A75A1FCF7BBE007239A3 /* gutterplay */ = {
 			isa = PBXGroup;
 			children = (
+				5204C0751FE1EE9E00322C7E /* KUIPopOver */,
 				5232A76D1FCF7D20007239A3 /* PopupButton.swift */,
 				5232A75B1FCF7BBE007239A3 /* AppDelegate.swift */,
 				5232A75F1FCF7BBE007239A3 /* Main.storyboard */,
@@ -139,9 +153,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5204C0791FE1EEAE00322C7E /* KUIPopOverUsable.swift in Sources */,
 				5232A75C1FCF7BBE007239A3 /* AppDelegate.swift in Sources */,
 				5232A76E1FCF7D20007239A3 /* PopupButton.swift in Sources */,
 				520D10EE1FD7565D00631E57 /* EditorViewController.swift in Sources */,
+				5204C0781FE1EEAE00322C7E /* KUIPopOver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
