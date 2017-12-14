@@ -52,37 +52,26 @@ class EditorViewController: UIViewController, UITextViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func rangeOfString(subString: String, inString: String, atOccurence: Int) -> NSRange {
-        var currentOccurence = 0
-        var rangeToSearchWithin = NSRange(location: 0, length: inString.count)
+    func linePosition(inString: String, lastOccurence: Int) -> String.Index? {
+        let splitted = inString.split(separator: "\n")
         
-        while true {
-            let string = NSString(string: inString)
-            let searchResult = string.range(of: subString, options: .caseInsensitive, range: rangeToSearchWithin)
-            
-            if searchResult.location == NSNotFound {
-                return searchResult
-            }
-            
-            if currentOccurence == atOccurence {
-                return searchResult
-            }
-            
-            currentOccurence += 1
-            
-            let newLocationToStartAt = searchResult.location + searchResult.length
-            rangeToSearchWithin = NSRange(location: newLocationToStartAt, length: inString.count - newLocationToStartAt)
+        if lastOccurence > splitted.count - 1 {
+            return nil
+        } else {
+            return splitted[lastOccurence].startIndex
         }
     }
     
     func sourceViewGutterPointForMessage(lineNumber: Int, columnNumber: Int) -> CGPoint {
-        var rangeOfPrecedingNewLine = self.rangeOfString(subString: "\n", inString: (self.sourceTextView?.text)!, atOccurence: lineNumber - 1)
+        let rangeOfPrecedingNewLine: Int
         
-        if rangeOfPrecedingNewLine.location == NSNotFound {
-            rangeOfPrecedingNewLine = NSRange(location: 0, length: 1)
+        if let indexPos = linePosition(inString: self.sourceTextView!.text, lastOccurence: lineNumber) {
+            rangeOfPrecedingNewLine = indexPos.encodedOffset
+        } else {
+            rangeOfPrecedingNewLine = 0
         }
         
-        let offendingCharacterIndex = rangeOfPrecedingNewLine.location + columnNumber
+        let offendingCharacterIndex = rangeOfPrecedingNewLine + columnNumber
         
         let errorStartPosition = self.sourceTextView?.position(from: (self.sourceTextView?.beginningOfDocument)!, offset: offendingCharacterIndex)
         let errorStartPositionPlusOne = self.sourceTextView?.position(from: errorStartPosition!, offset: 1)
